@@ -8,6 +8,9 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+if (!process.env.POSTGRES_URL) {
+  throw new Error('POSTGRES_URL is not defined in environment variables');
+}
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
