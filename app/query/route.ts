@@ -1,4 +1,7 @@
 import postgres from 'postgres';
+if (!process.env.POSTGRES_URL) {
+  throw new Error("Missing POSTGRES_URL");
+}
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -9,7 +12,6 @@ async function listInvoices() {
     JOIN customers ON invoices.customer_id = customers.id
     WHERE invoices.amount = 666;
   `;
-  console.log('data', data);
   
 	return data;
 }
